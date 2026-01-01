@@ -1,0 +1,19 @@
+# Systemd timer for Bitcoin Content Curator
+# Runs every hour
+#
+# Installation:
+# 1. Copy to /etc/systemd/system/bitcoin-curator.timer
+# 2. sudo systemctl daemon-reload
+# 3. sudo systemctl enable bitcoin-curator.timer
+# 4. sudo systemctl start bitcoin-curator.timer
+
+[Unit]
+Description=Run Bitcoin Content Curator hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

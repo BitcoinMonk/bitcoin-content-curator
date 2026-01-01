@@ -1,0 +1,23 @@
+# Systemd service for Bitcoin Content Curator
+#
+# Installation:
+# 1. Copy this file to /etc/systemd/system/bitcoin-curator.service
+# 2. Edit the paths and user below
+# 3. sudo systemctl daemon-reload
+# 4. sudo systemctl enable bitcoin-curator.timer
+# 5. sudo systemctl start bitcoin-curator.timer
+
+[Unit]
+Description=Bitcoin Content Curator
+After=network.target
+
+[Service]
+Type=oneshot
+User=monk
+WorkingDirectory=/home/monk/repos/bitcoin-content-curator
+Environment="ANTHROPIC_API_KEY=your-key-here"
+Environment="SILVERBULLET_SPACE=/home/monk/data/notes"
+ExecStart=/usr/bin/python3 /home/monk/repos/bitcoin-content-curator/curator.py
+
+[Install]
+WantedBy=multi-user.target
